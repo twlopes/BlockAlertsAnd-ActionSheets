@@ -49,7 +49,7 @@
     self = [super initWithTitle:title message:message];
     
     if (self) {
-        UITextField *theTextField = [[[UITextField alloc] initWithFrame:CGRectMake(kTextBoxHorizontalMargin, _height, _view.bounds.size.width - kTextBoxHorizontalMargin * 2, kTextBoxHeight)] autorelease]; 
+        UITextField *theTextField = [[[UITextField alloc] initWithFrame:CGRectMake(kTextBoxHorizontalMargin, _height, _view.bounds.size.width - kTextBoxHorizontalMargin * 2, kTextBoxHeight)] autorelease];
         
         [theTextField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [theTextField setAutocapitalizationType:UITextAutocapitalizationTypeWords];
@@ -83,13 +83,12 @@
     
     [super show];
     
-    [[NSNotificationCenter defaultCenter] addObserver:textField selector:@selector(becomeFirstResponder) name:@"AlertViewFinishedAnimations" object:nil];
+    //[self.textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
     [super dismissWithClickedButtonIndex:buttonIndex animated:animated];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:textField];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 
@@ -103,15 +102,15 @@
         
         frame.origin.y = screenHeight - keyboardSize.height - frame.size.height;
         
-        if (frame.origin.y < 0)
-            frame.origin.y = 0;
+        //if (frame.origin.y < 0)
+        //    frame.origin.y = 0;
         
         [UIView animateWithDuration:0.3
                               delay:0.0
                             options:UIViewAnimationCurveEaseOut
                          animations:^{
                              _view.frame = frame;
-                         } 
+                         }
                          completion:nil];
     }
 }
@@ -146,7 +145,7 @@
     
     if ([[string componentsSeparatedByCharactersInSet:unacceptedInput] count] > 1)
         return NO;
-    else 
+    else
         return YES;
 }
 
